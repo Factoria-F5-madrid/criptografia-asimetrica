@@ -62,7 +62,7 @@ GnuPG es una herramienta de cifrado y firma digital de código abierto.
 
     gpg --gen-key
 
-Este comando genera un par de claves (pública y privada).
+Este comando genera un par de claves (pública y privada). (Si es la primera vez que lo utilizas, te pedirá configurar nombre, apellido, correo electrónico y contraseña)
 
 **Exportar clave pública:**
 
