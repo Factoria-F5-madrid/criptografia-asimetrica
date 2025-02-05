@@ -1,4 +1,4 @@
-![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/portadadeciberseguridad.jpg)
+![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/portadaciberseguridad.jpg)
 
 # Guía sobre Clave Privada, Clave Pública y Certificados Digitales
 
