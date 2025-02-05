@@ -127,7 +127,10 @@ Preguntas: https://app.sli.do/event/tGWC1DSZAtsjE84bcBxZm6
 
 ## Misión 
 
-Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión  con la cláve pública de Jorge Benítez para que solo él pueda descifrarlo
+Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión  con la cláve pública de Jorge Benítez para que solo él pueda descifrarlo.
+
+### Clave pública de Jorge:
+
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
