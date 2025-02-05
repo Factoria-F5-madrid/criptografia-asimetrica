@@ -127,7 +127,7 @@ Preguntas: https://app.sli.do/event/tGWC1DSZAtsjE84bcBxZm6
 
 ## Misión 
 
-Envíame un mensaje de "qué te llevas" de esta sesión cifrado con mi cláve pública para que solo yo pueda descifrarlo
+Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión  con la cláve pública de Jorge Benítez para que solo él pueda descifrarlo
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -174,3 +174,31 @@ S8w1
 =35b5
 -----END PGP PUBLIC KEY BLOCK-----
 ```
+
+## Ayuda 💡
+
+- Primero debemos de crear un archivo para guardar la información de la llave de Jorge, podemos crearla desde VSC y llamarlo "clave_publica_jorge.asc" y guardarlo en la carpeta raíz (o donde se encuentren nuestros archivos de clave pública y privada).
+- Ahora debemos importar la clave pública de Jorge en tu llavero GnuPG. En la terminal, ejecutamos el siguiente comando:
+```
+gpg --import clave_publica_jorge.asc
+```
+
+- Ahora verificamos que esté guardada y con que nombre:
+```
+gpg --list-keys
+```
+Aquí verás la clave de Jorge con su identificador.
+
+- Ahora podemos crear un archivo "retro-minombre.txt" y para cifrarlo utilizas el siguiente comando:
+```
+gpg --output doc.gpg --encrypt --recipient jorge.benitez@factoriaf5.org Ruta/de/tu/archivo/reto-minombre.txt
+```
+
+Ahora envía el archivo doc.gpg que se creó en tu carpeta raíz 
+
+
+
+
+
+
+
