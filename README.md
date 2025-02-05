@@ -1,3 +1,5 @@
+![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/portadadeciberseguridad.jpg)
+
 # Guía sobre Clave Privada, Clave Pública y Certificados Digitales
 
 ## Introducción
