@@ -21,6 +21,8 @@ A diferencia de una contraseña, la clave privada nunca se transmite, lo que la 
 | Intercambio seguro | Sí                  | No         |
 | Usabilidad     | Requiere software especializado | Fácil      |
 
+![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/cifradoasimetrico.jpg)
+
 ## Certificado Digital
 
 Un certificado digital es un documento electrónico que asocia una clave pública con una identidad específica. Lo emite una Autoridad de Certificación (CA) y contiene:
