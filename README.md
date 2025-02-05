@@ -64,11 +64,11 @@ GnuPG es una herramienta de cifrado y firma digital de código abierto.
 
 Este comando genera un par de claves (pública y privada). (Si es la primera vez que lo utilizas, te pedirá configurar nombre, apellido, correo electrónico y contraseña)
 
-**Exportar clave pública:**
+**Exportar clave pública:** (se guarda en la carpeta raíz de tu ordenador)
 
     gpg --export -a "TuNombre" > clave_publica.asc
 
-**Exportar clave privada:**
+**Exportar clave privada:** (se guarda en la carpeta raíz de tu ordenador)
 
     gpg --export-secret-key -a "TuNombre" > clave_privada.asc
 
