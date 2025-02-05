@@ -39,7 +39,7 @@ Elementos
 
 * 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio**.  
 
-* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**.   
+* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**. https://emn178.github.io/online-tools/sha256.html  
 
 * 🏛 No repudio: Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
 
@@ -86,6 +86,31 @@ Este comando genera un par de claves (pública y privada).
 ## Conclusión
 
 El uso de criptografía con claves pública y privada, junto con certificados digitales, es fundamental para la seguridad digital. Aprender a utilizar herramientas como GPG nos permite proteger nuestra información y garantizar su autenticidad.
+
+## Preguntas de control
+
+¿Cómo garantiza la criptografía asimétrica el secreto en la comunicación entre dos partes?
+
+* a) Mediante el uso de una única clave compartida entre ambos
+* b) Cifrando el mensaje con la clave privada del remitente
+* c) Cifrando el mensaje con la clave pública del destinatario
+* d) Mediante el uso de una función hash
+
+¿Cuál es el propósito de una función hash en criptografía?
+
+* a) Cifrar un mensaje para que solo el destinatario lo descifre
+* b) Garantizar la integridad de los datos detectando cualquier alteración
+* c) Verificar la identidad del remitente mediante certificados digitales
+* d) Generar una clave privada a partir de una clave pública
+
+¿Cómo contribuyen las Autoridades de Certificación (CA) al no repudio en la comunicación digital?
+
+* a) Firmando digitalmente los mensajes enviados por los usuarios
+* b) Almacenando las claves privadas de los usuarios para garantizar autenticidad
+* c) Emitiendo certificados digitales que vinculan una identidad con una clave pública
+* d) Cifrando los mensajes para garantizar la confidencialidad
+
+Preguntas: https://app.sli.do/event/tGWC1DSZAtsjE84bcBxZm6
 
 ## Misión 
 
