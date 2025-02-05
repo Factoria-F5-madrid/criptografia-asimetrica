@@ -29,21 +29,17 @@ Un certificado digital es un documento electrónico que asocia una clave públic
 *   Datos identificativos del propietario.
 *   Firma digital de la CA que garantiza la autenticidad del certificado.
 
-### Elementos
+Elementos
 
-#### 🔐 Secreto  
-La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
+# 🔐 Secreto: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
 
-#### 🚫 No repudio  
-La **criptografía asimétrica** también permite el **no repudio**.  
+# 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio**.  
 
-#### ✅ Integridad  
-Las **funciones hash** son esenciales para garantizar la **integridad**.   
+# ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**.   
 
-#### 🏛 No repudio  
-Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
+# 🏛 No repudio: Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
 
-**Ejemplo de cifrado con GnuPG:**
+## Ejemplo de cifrado con GnuPG:
 
     gpg -c archivo.txt  # Cifra el archivo con una contraseña
 
@@ -89,8 +85,9 @@ El uso de criptografía con claves pública y privada, junto con certificados di
 
 ## Misión 
 
-Envíame una ronda de qué te llaves de esta sesión cifrado con mi cláve pública para que solo yo pueda descifrarlo
+Envíame un mensaje de "qué te llevas" de esta sesión cifrado con mi cláve pública para que solo yo pueda descifrarlo
 
+```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: GPGTools - https://gpgtools.org
 
@@ -134,3 +131,4 @@ pOa2RJOXV2hYb6JWXvimTDTXx1Rrbdq0KUgIEJKHebJXqksGY0a6U0rPTDVShVBQ
 S8w1
 =35b5
 -----END PGP PUBLIC KEY BLOCK-----
+```
