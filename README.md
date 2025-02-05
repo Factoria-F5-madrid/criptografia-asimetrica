@@ -31,13 +31,13 @@ Un certificado digital es un documento electrónico que asocia una clave públic
 
 Elementos
 
-# 🔐 Secreto: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
+* 🔐 Secreto: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
 
-# 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio**.  
+* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio**.  
 
-# ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**.   
+* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**.   
 
-# 🏛 No repudio: Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
+* 🏛 No repudio: Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
 
 ## Ejemplo de cifrado con GnuPG:
 
