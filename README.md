@@ -74,8 +74,21 @@ Este comando genera un par de claves (pública y privada). (Si es la primera vez
 
 **Cifrar y descifrar archivos:**
 
-    gpg -e -r "TuNombre" archivo.txt   # Cifrar
-    gpg -d archivo.txt.gpg              # Descifrar
+- Crea un archivo, ejemplo un texto.txt con un "hola" dentro.
+- Ejecuta en la terminal el siguiente comando, para cifrar el archivo texto.txt:
+    ```
+    gpg --output doc.gpg --encrypt --recipient TuCorreo Ruta/de/tu/archivo/texto.txt
+    ```
+  
+- El comando anterior va a crear un archivo doc.gpg cifrado en la carpeta raíz de nuestro ordenador.
+
+Si intentamos abrir ese archivo, por ejemplo con VSC no nos va a dejar ver el contenido porque está cifrado.
+
+- Para descifrarlo necesitamos el siguiente comando en la terminal:
+```
+  gpg -d Ruta/de/tu/archivo/doc.gpg
+```
+Esto nos debería mostrar el "hola" que teníamos dentro del texto.txt
 
 ## Más información
 
