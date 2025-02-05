@@ -88,7 +88,7 @@ Si intentamos abrir ese archivo, por ejemplo con VSC no nos va a dejar ver el co
 ```
 gpg -d Ruta/de/tu/archivo/doc.gpg
 ```
-Esto nos debería mostrar el "hola" que teníamos dentro del texto.txt
+Esto nos debería mostrar en terminal el "hola" que teníamos dentro del texto.txt
 
 ## Más información
 
