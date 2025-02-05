@@ -197,7 +197,7 @@ Aquí verás la clave de Jorge con su identificador.
 gpg --output doc.gpg --encrypt --recipient jorge.benitez@factoriaf5.org Ruta/de/tu/archivo/reto-minombre.txt
 ```
 
-Ahora envía el archivo doc.gpg que se creó en tu carpeta raíz 
+Ahora envía a Jorge el archivo doc.gpg que se creó en tu carpeta raíz para que lo desencripte. 🔓 
 
 
 
