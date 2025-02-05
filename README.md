@@ -77,7 +77,7 @@ Este comando genera un par de claves (pública y privada). (Si es la primera vez
 - Crea un archivo, ejemplo un texto.txt con un "hola" dentro.
 - Ejecuta en la terminal el siguiente comando, para cifrar el archivo texto.txt:
 ```
-    gpg --output doc.gpg --encrypt --recipient TuCorreo Ruta/de/tu/archivo/texto.txt
+gpg --output doc.gpg --encrypt --recipient TuCorreo Ruta/de/tu/archivo/texto.txt
 ```
   
 - El comando anterior va a crear un archivo doc.gpg cifrado en la carpeta raíz de nuestro ordenador.
@@ -86,7 +86,7 @@ Si intentamos abrir ese archivo, por ejemplo con VSC no nos va a dejar ver el co
 
 - Para descifrarlo necesitamos el siguiente comando en la terminal:
 ```
-  gpg -d Ruta/de/tu/archivo/doc.gpg
+gpg -d Ruta/de/tu/archivo/doc.gpg
 ```
 Esto nos debería mostrar el "hola" que teníamos dentro del texto.txt
 
