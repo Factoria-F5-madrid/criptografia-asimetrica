@@ -37,7 +37,7 @@ Elementos
 
 * 🔐 Secreto: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
 
-* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio**.  
+* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio** (Se refiere a que una persona no puede negar haber realizado una acción, como firmar un documento o enviar un mensaje).
 
 * ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**. https://emn178.github.io/online-tools/sha256.html  
 
