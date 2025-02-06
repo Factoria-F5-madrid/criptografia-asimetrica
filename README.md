@@ -4,7 +4,7 @@
 
 ## Introducción
 
-En este documento, explicaremos conceptos clave relacionados con la criptografía, incluyendo las diferencias entre claves privadas y públicas, certificados digitales y cómo utilizarlos en la práctica.
+En este documento, explicaremos conceptos clave relacionados con la criptografía, incluyendo las diferencias entre uso de contraseña y claves pública / privada, certificados digitales y cómo utilizarlos en la práctica.
 
 ## Clave Privada y Clave Pública
 
@@ -31,23 +31,17 @@ Un certificado digital es un documento electrónico que asocia una clave públic
 
 *   La clave pública del usuario.
 *   Datos identificativos del propietario.
-*   Firma digital de la CA que garantiza la autenticidad del certificado.
+*   Firma digital de la Certification Authority que garantiza la autenticidad del certificado. Utiliza un hash para la firma.
 
 Elementos
 
-* 🔐 Secreto: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
+* 🔐 Confidencialidad: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
 
-* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio** (Se refiere a que una persona no puede negar haber realizado una acción, como firmar un documento o enviar un mensaje).
+* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio** (Se refiere a que una persona no puede negar haber realizado una acción, como firmar un documento o enviar un mensaje ya que el certificado está aosciado a una persona). Las **autoridades identificadoras** se encargan de eso.
 
-* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la **integridad**. https://emn178.github.io/online-tools/sha256.html  
+* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la integridad. Por ejemplo, se usan para almacenar contraseñas de forma segura en bases de datos. Aunque puedes comprobar si una contraseña coincide generando su hash y comparándolo con el almacenado, no es posible revertir el hash para obtener la contraseña original. Es un proceso unidireccional. https://emn178.github.io/online-tools/sha256.html  
 
-* 🏛 No repudio: Las **autoridades identificadoras**, como las **Autoridades de Certificación (CA)**, juegan un papel crucial en el **no repudio**. 
-
-## Ejemplo de cifrado con GnuPG:
-
-    gpg -c archivo.txt  # Cifra el archivo con una contraseña
-
-## Cómo podemos hacerlo
+## Cómo podemos ponerlo en práctica
 
 ### Instalación y uso de GnuPG (GPG)
 
@@ -56,19 +50,25 @@ GnuPG es una herramienta de cifrado y firma digital de código abierto.
 **Instalar GPG:**
 
 *   En Linux/Mac: `sudo apt install gnupg` o `brew install gnupg`
-*   En Windows: Descargar desde la página oficial
+*   En Windows: Descargar desde la página oficial. https://www.gpg4win.org/get-gpg4win.html (Pones 0 y download)
 
-**Generar claves:**
+**Generar claves (En terminal o cmd):**
 
     gpg --gen-key
 
-Este comando genera un par de claves (pública y privada). (Si es la primera vez que lo utilizas, te pedirá configurar nombre, apellido, correo electrónico y contraseña)
+Te pedirá configurar nombre, apellido, correo electrónico y contraseña y genera un par de claves (pública y privada). 
 
-**Exportar clave pública:** (se guarda en la carpeta raíz de tu ordenador)
+Las claves que generaste con gpg --gen-key se almacenan en tu "Keyring" (anillo de claves) en una carpeta específica de tu usuario
+
+Puedes listarlas
+
+    gpg --list-keys
+
+**Exportar clave pública:**  ("TuNombre" puedeser el nombre que pusiste al crear la clave (Ejemplo: "Juan Pérez") o el correo electrónico asociado (Ejemplo: "juan@example.com"). Ejecutar el cmd como administrador. Guarda el archivo en el directorio donde ejecutaste el comando. 
 
     gpg --export -a "TuNombre" > clave_publica.asc
 
-**Exportar clave privada:** (se guarda en la carpeta raíz de tu ordenador)
+**Exportar clave privada:** 
 
     gpg --export-secret-key -a "TuNombre" > clave_privada.asc
 
@@ -80,7 +80,7 @@ Este comando genera un par de claves (pública y privada). (Si es la primera vez
 gpg --output doc.gpg --encrypt --recipient TuCorreo Ruta/de/tu/archivo/texto.txt
 ```
   
-- El comando anterior va a crear un archivo doc.gpg cifrado en la carpeta raíz de nuestro ordenador.
+- El comando anterior va a crear un archivo doc.gpg cifrado en la carpeta desde donde se genera el comando
 
 Si intentamos abrir ese archivo, por ejemplo con VSC no nos va a dejar ver el contenido porque está cifrado.
 
@@ -125,7 +125,7 @@ El uso de criptografía con claves pública y privada, junto con certificados di
 
 Preguntas: https://app.sli.do/event/tGWC1DSZAtsjE84bcBxZm6
 
-## Misión 
+## Reto
 
 Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión  con la cláve pública de Jorge Benítez para que solo él pueda descifrarlo.
 
