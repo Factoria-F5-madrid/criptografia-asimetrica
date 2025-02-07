@@ -209,8 +209,17 @@ Ahora envía a Jorge el archivo reto-minombre.gpg que se creó en tu carpeta ra�
 
 Convertir claves: 
 
-```gpg --dearmor < clave_privada.asc > clave_privada.gpg
-openssl rsa -in clave_privada.gpg -out clave_privada.pem```
+```
+gpg --dearmor < clave_privada.asc > clave_privada.gpg
+openssl rsa -in clave_privada.gpg -out clave_privada.pem
+```
+
+Para hacerlo directamente con OpenSSL. https://www.openssl.org/
+
+```
+openssl genpkey -algorithm RSA -out clave_privada.pem -aes256
+openssl rsa -in clave_privada.pem -pubout -out clave_publica.pem
+```
 
 
 
