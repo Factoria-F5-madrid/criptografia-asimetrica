@@ -199,6 +199,19 @@ gpg --output reto-minombre.gpg --encrypt --recipient jorge.benitez@factoriaf5.or
 
 Ahora envía a Jorge el archivo reto-minombre.gpg que se creó en tu carpeta raíz para que lo desencripte. 🔓 
 
+# Importante recordar
+
+* GPG usa el formato PGP (Pretty Good Privacy) basado en el estándar OpenPGP.
+* OpenSSL usa claves en formato PEM, que están basadas en estándares como PKCS#1, PKCS#8, o X.509. OpenSSL usa RSA, ECC, DSA, y otros, pero en un formato más estándar para certificados y comunicación SSL/TLS.
+
+* GPG se usa principalmente para cifrar archivos y correos electrónicos. Lo hemos usado para entender cómo funciona por detrás
+* OpenSSL se usa principalmente para cifrado SSL/TLS, certificados digitales y firmas criptográficas.
+
+Convertir claves: 
+
+```gpg --dearmor < clave_privada.asc > clave_privada.gpg
+openssl rsa -in clave_privada.gpg -out clave_privada.pem```
+
 
 
 
