@@ -194,10 +194,10 @@ Aquí verás la clave de Jorge con su identificador.
 
 - Ahora podemos crear un archivo "retro-minombre.txt" y para cifrarlo utilizas el siguiente comando:
 ```
-gpg --output doc.gpg --encrypt --recipient jorge.benitez@factoriaf5.org Ruta/de/tu/archivo/reto-minombre.txt
+gpg --output reto-minombre.gpg --encrypt --recipient jorge.benitez@factoriaf5.org Ruta/de/tu/archivo/reto-minombre.txt
 ```
 
-Ahora envía a Jorge el archivo doc.gpg que se creó en tu carpeta raíz para que lo desencripte. 🔓 
+Ahora envía a Jorge el archivo reto-minombre.gpg que se creó en tu carpeta raíz para que lo desencripte. 🔓 
 
 
 
