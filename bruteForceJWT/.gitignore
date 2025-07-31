@@ -1,0 +1,79 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de claves y certificados
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+private.key
+public.key
+
+# Archivos de tokens y datos sensibles
+tokens.txt
+passwords.txt
+wordlist.txt
+dictionary.txt
+common_passwords.txt
+
+# Archivos de resultados de ataques
+results/
+output/
+logs/
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de backup
+*.bak
+*.backup
+
+# Archivos de datos de prueba
+test_data/
+sample_tokens.txt
+example_jwt.txt
+
+# Archivos de configuración de herramientas de seguridad
+config.json
+settings.json
+
+# Archivos de reportes
+reports/
+*.report
+*.html
+
+# Archivos de caché
+.cache/
+.tmp/
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de logs de seguridad
+security.log
+audit.log
+access.log 

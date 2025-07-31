@@ -1,136 +1,376 @@
 ![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/portadaciberseguridad.jpg)
 
-# Guía sobre Clave Privada, Clave Pública y Certificados Digitales
+# Bases de Seguridad en la Web
+
+## 📋 Índice
+
+1. [Introducción](#introducción)
+2. [Conceptos Fundamentales](#1-conceptos-fundamentales)
+   - [Función Hash](#-función-hash)
+   - [Criptografía Asimétrica vs Simétrica](#-criptografía-asimétrica-vs-criptografía-simétrica)
+   - [Certificado Digital](#-certificado-digital)
+3. [Aplicaciones Prácticas](#2-aplicaciones-prácticas-de-estos-conceptos)
+   - [Contraseñas en Base de Datos](#-contraseñas-en-base-de-datos)
+   - [SSH (Secure Shell)](#-ssh-secure-shell)
+   - [HTTPS (HTTP Secure)](#-https-http-secure)
+   - [Tokens JWT](#-tokens-jwt-json-web-tokens)
+4. [Reto Práctico](#4-reto-práctico)
+5. [Información Adicional](#6-información-adicional)
+
+---
 
 ## Introducción
 
-En este documento, explicaremos conceptos clave relacionados con la criptografía, incluyendo las diferencias entre uso de contraseña y claves pública / privada, certificados digitales y cómo utilizarlos en la práctica.
+En este documento aprenderemos los conceptos fundamentales de criptografía y cómo se aplican en el mundo real para garantizar la seguridad digital. Comprenderemos la diferencia entre cifrado simétrico y asimétrico, funciones hash, y sus aplicaciones prácticas.
 
-## Clave Privada y Clave Pública
+> [!TIP]
+> 🎯 ¿Cuál es el objetivo principal de la criptografía en seguridad digital?
+> - 🔵 Hacer que los datos sean más rápidos de procesar
+> - 🔴 Proteger la confidencialidad, integridad y autenticidad de la información
+> - 🟢 Reducir el tamaño de los archivos
+> - 🟡 Hacer que los datos sean más fáciles de compartir
 
-La criptografía asimétrica se basa en el uso de dos claves:
+## 1. Conceptos Fundamentales
+
+### 🔐 Función Hash
+
+Una función hash es un algoritmo matemático que convierte datos de entrada de cualquier tamaño en una cadena de texto de longitud fija. Es un proceso **unidireccional** - no se puede revertir para obtener los datos originales.
+
+**Características principales:**
+- **Determinista**: La misma entrada siempre produce la misma salida
+- **Unidireccional**: No se puede revertir el proceso (Hay pérdida de información)
+- **Resistente a colisiones**: Es muy difícil encontrar dos entradas que produzcan el mismo hash
+- **Efecto avalancha**: Un pequeño cambio en la entrada produce un hash completamente diferente
+
+**Ejemplos de algoritmos hash:**
+- SHA-256 (Secure Hash Algorithm 256-bit)
+- bcrypt - Especializado para contraseñas
+
+**Aplicaciones:**
+- Almacenamiento seguro de contraseñas
+- Verificación de integridad de archivos
+- Firmas digitales
+- Blockchain y criptomonedas
+
+**Herramienta online para experimentar:** https://emn178.github.io/online-tools/sha256.html
+
+#### **Ejemplos Prácticos:**
+
+**Python:**
+```python
+import hashlib
+
+# Hash SHA-256
+texto = "Hola mundo"
+hash_sha256 = hashlib.sha256(texto.encode('utf-8')).hexdigest()
+print(f"SHA-256: {hash_sha256}")
+```
+
+**Node.js:**
+```javascript
+const crypto = require('crypto');
+
+// Hash SHA-256
+const texto = "Hola mundo";
+const hashSha256 = crypto.createHash('sha256').update(texto).digest('hex');
+console.log(`SHA-256: ${hashSha256}`);
+```
+
+> [!TIP]
+> 🔐 ¿Cuál es la característica más importante de una función hash criptográfica?
+> - 🔵 Permite revertir el proceso para obtener los datos originales
+> - 🔴 Es unidireccional y no se puede revertir
+> - 🟢 Siempre produce una salida de longitud variable
+> - 🟡 Solo funciona con datos de texto plano
+
+### 🔑 Criptografía Asimétrica vs Criptografía Simétrica
+
+#### **Criptografía Simétrica:**
+- **Usa una sola clave** para cifrar y descifrar datos
+- **Ejemplos de algoritmos:** AES, DES, 3DES, ChaCha20
+- **Ventajas:** Más rápida y eficiente
+- **Desventajas:** Requiere compartir la clave de forma segura
+- **Uso típico:** Cifrado de archivos
+
+#### **Criptografía Asimétrica:**
+La criptografía asimétrica utiliza un par de claves matemáticamente relacionadas:
 
 *   **Clave pública:** Puede compartirse libremente y se usa para cifrar datos o verificar firmas digitales.
 *   **Clave privada:** Se mantiene en secreto y se usa para descifrar datos cifrados con la clave pública o para firmar digitalmente.
 
-El uso conjunto de estas claves permite garantizar la seguridad y autenticidad de la información.
+**Ventajas sobre la criptografía simétrica:**
+- La clave privada nunca se transmite
+- Mayor seguridad contra interceptación
+- Permite autenticación sin revelar secretos
+- No requiere un canal seguro para intercambiar claves
 
-A diferencia de una contraseña, la clave privada nunca se transmite, lo que la hace mucho más segura. Nadie puede interceptarla ni obtenerla de forma remota. ¡Descifrar Enigma es una película fascinante que ilustra muy bien los desafíos de la criptografía!
+**Desventajas:**
+- Más lenta que la criptografía simétrica
+- Requiere más recursos computacionales
 
-| Característica | Clave Pública/Privada | Contraseña |
-| :------------ | :------------------ | :--------- |
-| Seguridad      | Alta                | Depende de la complejidad y de que la puedan interceptar |
-| Intercambio seguro | Sí                  | No         |
-| Usabilidad     | Requiere software especializado | Fácil      |
+#### **Criptografía Híbrida (Mejor de ambos mundos):**
+En la práctica, se suele combinar ambos tipos:
+1. **Criptografía asimétrica** para intercambiar una clave simétrica de forma segura
+2. **Criptografía simétrica** para cifrar los datos reales (más rápido)
+
+| Característica | Criptografía Simétrica | Criptografía Asimétrica |
+| :------------ | :------------------ | :------------------ |
+| Número de claves | 1 (compartida) | 2 (pública + privada) |
+| Velocidad | Alta | Media |
+| Seguridad | Alta (si la clave está protegida y es larga) | Muy alta |
+| Intercambio seguro | Requiere canal seguro | No requiere |
+| Usabilidad | Moderada | Requiere software especializado |
 
 ![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/cifradoasimetrico.jpg)
 
-## Certificado Digital
+> [!TIP]
+> 🔑 ¿Cuál es la principal diferencia entre criptografía simétrica y asimétrica?
+> - 🔵 La simétrica usa una sola clave, la asimétrica usa un par de claves
+> - 🔴 La asimétrica es más rápida que la simétrica
+> - 🟢 La simétrica es más segura que la asimétrica
+> - 🟡 Ambas requieren compartir la clave de forma segura
 
-Un certificado digital es un documento electrónico que asocia una clave pública con una identidad específica. Lo emite una Autoridad de Certificación (CA) y contiene:
+### 🏛️ Certificado Digital
+
+Un certificado digital es un documento electrónico que asocia una clave pública con una identidad específica. La función clave es que una Autoridad de Certificación (CA) verifica tu identidad y garantiza que la clave pública pertenece realmente a la persona o entidad declarada. Lo emite una Autoridad de Certificación (CA) y contiene:
 
 *   La clave pública del usuario.
 *   Datos identificativos del propietario.
-*   Firma digital de la Certification Authority que garantiza la autenticidad del certificado. Utiliza un hash para la firma.
+*   Firma digital de la Certification Authority que garantiza la autenticidad del certificado.
 
-Elementos
+**Ya tenemos los tres pilares de la seguridad digital:**
 
-* 🔐 Confidencialidad: La **criptografía asimétrica**, con su par de claves (**pública y privada**), es fundamental para garantizar el **secreto**.   
+* 🔐 **Confidencialidad**: La criptografía simétrica y asimétrica garantizan el **secreto** de la información. Romper el cifrado de un archivo con clave pública y privada es computacionalmente imposible sin acceder a las claves.
 
-* 🚫 No repudio: La **criptografía asimétrica** también permite el **no repudio** (Se refiere a que una persona no puede negar haber realizado una acción, como firmar un documento o enviar un mensaje ya que el certificado está aosciado a una persona). Las **autoridades identificadoras** se encargan de eso.
+* 🚫 **No repudio**: Una persona no puede negar haber realizado una acción, como firmar un documento o enviar un mensaje, ya que el certificado está asociado a una persona específica. Es como una identificación digital verificada por una autoridad.
 
-* ✅ Integridad: Las **funciones hash** son esenciales para garantizar la integridad. Por ejemplo, se usan para almacenar contraseñas de forma segura en bases de datos. Aunque puedes comprobar si una contraseña coincide generando su hash y comparándolo con el almacenado, no es posible revertir el hash para obtener la contraseña original. Es un proceso unidireccional. https://emn178.github.io/online-tools/sha256.html  
+* ✅ **Integridad**: Las funciones hash garantizan que los datos no han sido alterados durante la transmisión. Por ejemplo, al descargar un archivo, puedes verificar su hash para asegurarte de que no ha sido modificado.
 
-## Cómo podemos ponerlo en práctica
+> [!TIP]
+> 🏛️ ¿Qué garantiza un certificado digital emitido por una Autoridad de Certificación?
+> - 🔵 Que el contenido del certificado es confidencial
+> - 🔴 Que la clave pública pertenece realmente a la identidad declarada
+> - 🟢 Que el certificado nunca expirará
+> - 🟡 Que el propietario puede usar cualquier clave privada
 
-### Instalación y uso de GnuPG (GPG)
+## 2. Aplicaciones Prácticas de estos Conceptos
 
-GnuPG es una herramienta de cifrado y firma digital de código abierto.
+### 💾 Contraseñas en Base de Datos
 
-**Instalar GPG:**
+**Problema:** Almacenar contraseñas en texto plano es un riesgo de seguridad crítico.
 
-*   En Linux/Mac: `sudo apt install gnupg` o `brew install gnupg`
-*   En Windows: Descargar desde la página oficial. https://www.gpg4win.org/get-gpg4win.html (Pones 0 y download)
+**Solución:** Usar funciones hash para almacenar solo el hash de la contraseña.
 
-**Generar claves (En terminal o cmd):**
+```sql
+-- ❌ INCORRECTO - Nunca almacenar contraseñas en texto plano
+INSERT INTO users (username, password) VALUES ('usuario', 'miContraseña123');
 
-    gpg --gen-key
-
-Te pedirá configurar nombre, apellido, correo electrónico y contraseña y genera un par de claves (pública y privada). 
-
-Las claves que generaste con gpg --gen-key se almacenan en tu "Keyring" (anillo de claves) en una carpeta específica de tu usuario
-
-Puedes listarlas
-
-    gpg --list-keys
-
-**Exportar clave pública:**  ("TuNombre" puedeser el nombre que pusiste al crear la clave (Ejemplo: "Juan Pérez") o el correo electrónico asociado (Ejemplo: "juan@example.com"). Ejecutar el cmd como administrador. Guarda el archivo en el directorio donde ejecutaste el comando. 
-
-    gpg --export -a "TuNombre" > clave_publica.asc
-
-**Exportar clave privada:** 
-
-    gpg --export-secret-key -a "TuNombre" > clave_privada.asc
-
-**Cifrar y descifrar archivos:**
-
-- Crea un archivo, ejemplo un texto.txt con un "hola" dentro.
-- Ejecuta en la terminal el siguiente comando, para cifrar el archivo texto.txt:
+-- ✅ CORRECTO - Almacenar solo el hash
+INSERT INTO users (username, password_hash) VALUES ('usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
 ```
-gpg --output doc.gpg --encrypt --recipient TuCorreo Ruta/de/tu/archivo/texto.txt
+
+Ver base de datos
+
+**Proceso de verificación:**
+1. Usuario introduce contraseña
+2. Sistema genera hash de la contraseña introducida
+3. Compara con el hash almacenado en la base de datos
+4. Si coinciden, autenticación exitosa
+
+> [!TIP]
+> 💾 ¿Por qué es peligroso almacenar contraseñas en texto plano en una base de datos?
+> - 🔵 Porque ocupan demasiado espacio de almacenamiento
+> - 🔴 Porque si alguien accede a la base de datos, puede ver todas las contraseñas
+> - 🟢 Porque las contraseñas se corrompen fácilmente
+> - 🟡 Porque es más lento procesar texto plano
+
+### 🖥️ SSH (Secure Shell)
+
+SSH proporciona acceso seguro a servidores remotos usando **dos métodos de autenticación**:
+
+#### **1. Autenticación por Contraseña:**
+```bash
+ssh usuario@servidor
+# Te pide la contraseña del usuario en el servidor
 ```
-  
-- El comando anterior va a crear un archivo doc.gpg cifrado en la carpeta desde donde se genera el comando
 
-Si intentamos abrir ese archivo, por ejemplo con VSC no nos va a dejar ver el contenido porque está cifrado.
-
-- Para descifrarlo necesitamos el siguiente comando en la terminal:
+#### **2. Autenticación por Claves (Recomendado):**
+```bash
+ssh -i /ruta/a/tu/clave_privada usuario@servidor
+# No requiere contraseña, más seguro
 ```
-gpg -d Ruta/de/tu/archivo/doc.gpg
+
+**Ventajas de usar claves SSH:**
+- ✅ No se transmiten contraseñas por la red
+- ✅ Más resistente a ataques de fuerza bruta
+- ✅ Permite automatización sin contraseñas
+- ✅ Más seguro para acceso remoto
+
+**Instalación de OpenSSH:**
+```bash
+# Linux
+sudo apt update
+sudo apt install openssh-client
+
+# macOS
+brew install openssh
+
+# Windows (verificado)
+ssh-keygen
 ```
-Esto nos debería mostrar en terminal el "hola" que teníamos dentro del texto.txt
 
-## Más información
+**Generar par de claves SSH:**
+```bash
+ssh-keygen -t ed25519 -C "tu_email@example.com"
+```
 
-*   Certificados digitales: [FNMT](https://www.fnmt.es/)
-*   GnuPG: [gnupg.org](https://gnupg.org/)
-*   Historia de Enigma: [Wikipedia](https://es.wikipedia.org/wiki/Enigma_(máquina))
+**Estructura del directorio SSH:**
+```bash
+ls -l ~/.ssh/
+# Contiene:
+# - Claves privadas: id_rsa, id_ed25519, etc.
+# - Claves públicas: id_rsa.pub, id_ed25519.pub, etc.
+# - Archivos de configuración: config, known_hosts, etc.
+```
 
-## Conclusión
+**Proceso de autenticación con claves:**
+1. Cliente genera par de claves SSH
+2. Clave pública se añade al servidor (`~/.ssh/authorized_keys`)
+3. Conexión se autentica mediante verificación criptográfica
+4. No se transmiten contraseñas por la red
 
-El uso de criptografía con claves pública y privada, junto con certificados digitales, es fundamental para la seguridad digital. Aprender a utilizar herramientas como GPG nos permite proteger nuestra información y garantizar su autenticidad.
+> [!TIP]
+> 🖥️ ¿Cuál es la principal ventaja de SSH con claves sobre SSH con contraseña?
+> - 🔵 Es más rápido que usar contraseñas
+> - 🔴 No requiere transmitir contraseñas por la red
+> - 🟢 Es más fácil de configurar
+> - 🟡 Permite acceder a más servidores simultáneamente
 
-## Preguntas de control
+### 🔒 HTTPS (HTTP Secure)
 
-¿Cómo garantiza la criptografía asimétrica el secreto en la comunicación entre dos partes?
+HTTPS utiliza certificados SSL/TLS para cifrar la comunicación entre cliente y servidor.
 
-* a) Mediante el uso de una única clave compartida entre ambos
-* b) Cifrando el mensaje con la clave privada del remitente
-* c) Cifrando el mensaje con la clave pública del destinatario
-* d) Mediante el uso de una función hash
+**Proceso de SSL/TLS:**
+1. Cliente solicita conexión HTTPS
+2. Servidor envía su certificado digital (clave pública)
+3. Cliente verifica la autenticidad del certificado. Depende de la autoridad certificadora. (Hay de pago y gratuitas)
+4. Se establece una clave simétrica para cifrar la sesión
+5. Toda la comunicación posterior está cifrada
 
-¿Cuál es el propósito de una función hash en criptografía?
+**Verificar certificados en el navegador:**
+- Hacer clic en el candado en la barra de direcciones
+- Ver detalles del certificado
+- Comprobar la autoridad certificadora
 
-* a) Cifrar un mensaje para que solo el destinatario lo descifre
-* b) Garantizar la integridad de los datos detectando cualquier alteración
-* c) Verificar la identidad del remitente mediante certificados digitales
-* d) Generar una clave privada a partir de una clave pública
+**⚠️ Importante:** HTTPS no garantiza seguridad total por sí solo. El contenido puede seguir siendo vulnerable a otros ataques como phishing, donde puedes estar enviando información cifrada a un sitio falso que imita al legítimo.
 
-¿Cómo contribuyen las Autoridades de Certificación (CA) al no repudio en la comunicación digital?
+> [!TIP]
+> 🔒 ¿Qué garantiza HTTPS en una comunicación web?
+> - 🔵 Que el sitio web es completamente seguro contra todos los ataques
+> - 🔴 Que la comunicación entre cliente y servidor está cifrada
+> - 🟢 Que el servidor nunca puede ser hackeado
+> - 🟡 Que el usuario es anónimo
 
-* a) Firmando digitalmente los mensajes enviados por los usuarios
-* b) Almacenando las claves privadas de los usuarios para garantizar autenticidad
-* c) Emitiendo certificados digitales que vinculan una identidad con una clave pública
-* d) Cifrando los mensajes para garantizar la confidencialidad
+### 🎫 Tokens JWT (JSON Web Tokens)
 
-Preguntas: https://app.sli.do/event/tGWC1DSZAtsjE84bcBxZm6
+Los tokens JWT son un estándar para transmitir información de forma segura entre partes. En lugar de enviar usuario y contraseña en cada petición, te autenticas una vez y recibes un token. En las siguientes peticiones solo envías el token.
 
-## Reto
+**Estructura de un JWT:**
+```
+header.payload.signature
+```
 
-Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión  con la cláve pública de Jorge Benítez para que solo él pueda descifrarlo.
+**⚠️ Importante:** El header y el payload no están cifrados, solo codificados en Base64. Es fácil extraer la información. La criptografía se aplica solo a la firma, que verifica que el contenido no ha sido alterado y que proviene de la fuente correcta. La firma se crea así: signature = RSA-SHA256(header.payload, privateKey)
 
-### Clave pública de Jorge:
+**Herramienta para analizar JWT:** https://www.jwt.io/ (Ve el contenido del token)
 
+**Ejemplo de token JWT:**
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzEyNjRhNWUyYzQ0MGM1ZDJhNjc4ZjIiLCJ1c2VybmFtZSI6Im1hdXJvODciLCJlbWFpbCI6Im1hdUBnbWFpbC5jb20iLCJpYXQiOjE3MjkyNTg2Nzh9.EholRD6IFwhW8XZxBhTzvqVqTzqindKqJUbPmVU7M34
+```
+
+Clave: 123456789 (Descifrada con un programa en JS dentro del repo ;)
+
+**Algoritmos de firma:**
+
+1. **HS256 (HMAC-SHA256)**: Firma simétrica
+   - Usa la misma clave secreta para firmar y verificar
+   - Rápido y sencillo
+   - Requiere compartir la clave secreta
+
+2. **RS256 (RSA-SHA256)**: Firma asimétrica
+   - Firma con clave privada, verifica con clave pública
+   - Más seguro para entornos distribuidos
+   - Solo el emisor necesita la clave privada
+
+**Vulnerabilidades:**
+- **Fuerza bruta**: Si la clave secreta es débil. Si capturas el token puedes ir haciendo pruebas hasta conseguir la clave
+- **Exposición de tokens**: Si se interceptan en tránsito
+
+**⚠️ Importante:** Por eso es tan importante limitar el número de intentos de acceso a servicios, implementar rate limiting y monitorear intentos de acceso sospechosos.
+
+> [!TIP]
+> 🎫 ¿Cuál es la diferencia principal entre JWT con HS256 y RS256?
+> - 🔵 HS256 es más rápido que RS256
+> - 🔴 HS256 usa firma simétrica, RS256 usa firma asimétrica
+> - 🟢 RS256 es más fácil de implementar
+> - 🟡 HS256 es más seguro para entornos distribuidos
+
+
+## 4. Reto Práctico
+
+### 🎯 Objetivo
+Enviar un archivo cifrado donde escribas "qué te llevas" de esta sesión con la clave pública de Jorge Benítez para que solo él pueda descifrarlo. También puedes hacer lo mismo con un compi.
+
+### 🛠️ Instalación de GPG
+
+**Paso 1: Instalar GPG en tu sistema**
+```bash
+# Linux
+sudo apt install gnupg
+
+# macOS
+brew install gnupg
+
+# Windows
+# Descargar desde: https://www.gpg4win.org/get-gpg4win.html
+```
+
+### 🔑 Configuración Inicial
+
+**Paso 2: Generar tu par de claves**
+```bash
+gpg --gen-key
+# Te pedirá: nombre, apellido, correo electrónico y contraseña
+```
+
+**Paso 3: Verificar que las claves se crearon**
+```bash
+gpg --list-keys
+```
+
+### 📝 Pasos del Reto
+
+**Paso 4: Importar la clave pública de Jorge**
+```bash
+gpg --keyserver hkps://keys.openpgp.org --recv-keys 85884EA092F85E44
+```
+
+**Paso 5: Crear tu archivo de reflexión**
+```bash
+echo "Lo que me llevo de esta sesión..." > reto-minombre.txt
+```
+
+**Paso 6: Cifrar el archivo**
+```bash
+gpg --output reto-minombre.gpg --encrypt --recipient jorgebenitezlopez@gmail.com reto-minombre.txt
+```
+
+**Paso 7: Enviar el archivo cifrado** a Jorge para que lo descifre 🔓
+
+### 🌐 Alternativa: Usar Clave Pública Directa
+
+Si tienes problemas con el servidor de claves, puedes usar esta clave pública de Jorge:
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -178,52 +418,69 @@ S8w1
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-## Ayuda 💡
+### 🔧 Comandos Adicionales Útiles
 
-- Primero debemos de crear un archivo para guardar la información de la llave de Jorge, podemos crearla desde VSC y llamarlo "clave_publica_jorge.asc" y guardarlo en la carpeta raíz (o donde se encuentren nuestros archivos de clave pública y privada).
-- Ahora debemos importar la clave pública de Jorge en tu llavero GnuPG. En la terminal, ejecutamos el siguiente comando:
-```
-gpg --import clave_publica_jorge.asc
-```
-
-- Ahora verificamos que esté guardada y con que nombre:
-```
-gpg --list-keys
-```
-Aquí verás la clave de Jorge con su identificador.
-
-- Ahora podemos crear un archivo "retro-minombre.txt" y para cifrarlo utilizas el siguiente comando:
-```
-gpg --output reto-minombre.gpg --encrypt --recipient jorge.benitez@factoriaf5.org Ruta/de/tu/archivo/reto-minombre.txt
+**Exportar tu clave pública para compartirla:**
+```bash
+gpg --export -a "TuNombre" > clave_publica.asc
 ```
 
-Ahora envía a Jorge el archivo reto-minombre.gpg que se creó en tu carpeta raíz para que lo desencripte. 🔓 
-
-# Importante recordar
-
-* GPG usa el formato PGP (Pretty Good Privacy) basado en el estándar OpenPGP.
-* OpenSSL usa claves en formato PEM, que están basadas en estándares como PKCS#1, PKCS#8, o X.509. OpenSSL usa RSA, ECC, DSA, y otros, pero en un formato más estándar para certificados y comunicación SSL/TLS.
-
-* GPG se usa principalmente para cifrar archivos y correos electrónicos. Lo hemos usado para entender cómo funciona por detrás
-* OpenSSL se usa principalmente para cifrado SSL/TLS, certificados digitales y firmas criptográficas.
-
-Convertir claves: 
-
+**Cifrar archivo para ti mismo:**
+```bash
+gpg --output archivo_cifrado.gpg --encrypt --recipient TuCorreo archivo.txt
 ```
+
+**Descifrar archivo:**
+```bash
+gpg -d archivo_cifrado.gpg
+```
+
+> [!TIP]
+> 🎯 ¿Por qué es importante usar la clave pública correcta del destinatario al cifrar un archivo?
+> - 🔵 Para que el archivo se cifre más rápido
+> - 🔴 Para que solo el destinatario correcto pueda descifrarlo
+> - 🟢 Para que el archivo sea más pequeño
+> - 🟡 Para que el archivo se pueda abrir en cualquier sistema
+
+
+
+
+## 6. Información Adicional
+
+### 🔄 Diferencias entre GPG y OpenSSL
+
+**GPG (GNU Privacy Guard):**
+- Usa formato PGP (Pretty Good Privacy) basado en OpenPGP
+- Principalmente para cifrar archivos y correos electrónicos
+- Herramienta de usuario a usuario
+
+**OpenSSL:**
+- Usa claves en formato PEM basadas en estándares PKCS#1, PKCS#8, o X.509
+- Principalmente para SSL/TLS, certificados digitales y firmas criptográficas
+- Más estándar para certificados y comunicación SSL/TLS
+
+### 🔧 Conversión entre Formatos
+
+```bash
+# Convertir clave GPG a formato PEM
 gpg --dearmor < clave_privada.asc > clave_privada.gpg
 openssl rsa -in clave_privada.gpg -out clave_privada.pem
-```
 
-Para hacerlo directamente con OpenSSL. https://www.openssl.org/
-
-```
+# Generar claves directamente con OpenSSL
 openssl genpkey -algorithm RSA -out clave_privada.pem -aes256
 openssl rsa -in clave_privada.pem -pubout -out clave_publica.pem
 ```
 
+### 📚 Recursos Adicionales
 
+*   **Certificados digitales:** [FNMT](https://www.fnmt.es/)
+*   **GnuPG:** [gnupg.org](https://gnupg.org/)
+*   **OpenSSL:** [openssl.org](https://www.openssl.org/)
+*   **Historia de Enigma:** [Wikipedia](https://es.wikipedia.org/wiki/Enigma_(máquina))
+*   **JWT Debugger:** [jwt.io](https://www.jwt.io/)
 
+## Conclusión
 
+El uso de criptografía con claves pública y privada, junto con certificados digitales y funciones hash, es fundamental para la seguridad digital moderna. Comprender estos conceptos y saber utilizar herramientas como GPG, SSH y HTTPS nos permite proteger nuestra información y garantizar su autenticidad en un mundo cada vez más conectado.
 
-
-
+La seguridad no es un producto, sino un proceso continuo que requiere comprensión de los fundamentos y práctica constante con las herramientas disponibles.
