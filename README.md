@@ -397,9 +397,68 @@ gpg --list-keys
 
 ### 📝 Pasos del Reto
 
-**Paso 4: Importar la clave pública de Jorge**
+**Paso 4: Importar la clave pública de Jorge directamente**
 ```bash
-gpg --keyserver hkps://keys.openpgp.org --recv-keys 85884EA092F85E44
+# Crear un archivo con la clave pública
+cat > jorge_clave_publica.asc << 'EOF'
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: GPGTools - https://gpgtools.org
+
+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
+dw==
+=z+2+
+-----END PGP PUBLIC KEY BLOCK-----
+EOF
+
+# Importar la clave desde el archivo
+gpg --import jorge_clave_publica.asc
 ```
 
 **Paso 5: Crear tu archivo de reflexión**
@@ -414,9 +473,9 @@ gpg --output reto-minombre.gpg --encrypt --recipient jorgebenitezlopez@gmail.com
 
 **Paso 7: Enviar el archivo cifrado** a Jorge para que lo descifre 🔓
 
-### 🌐 Alternativa: Usar Clave Pública Directa
+### 🌐 Nota sobre la Clave Pública
 
-Si tienes problemas con el servidor de claves, puedes usar esta clave pública de Jorge:
+La clave pública de Jorge ya está incluida en los pasos anteriores. Si prefieres usar un método alternativo o tienes problemas con el servidor de claves, aquí tienes la clave completa:
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
