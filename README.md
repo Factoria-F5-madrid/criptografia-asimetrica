@@ -1,6 +1,10 @@
 ![cifradoasimetrico](https://jorgebenitezlopez.com/tiddlywiki/pro/portadaciberseguridad.jpg)
 
 # Bases de Seguridad en la Web
+<br>
+<br>
+<br>
+<br>
 
 ## 📋 Índice
 
@@ -15,9 +19,12 @@
    - [HTTPS (HTTP Secure)](#-https-http-secure)
    - [Tokens JWT](#-tokens-jwt-json-web-tokens)
 4. [Reto Práctico](#4-reto-práctico)
-5. [Información Adicional](#6-información-adicional)
+5. [Información Adicional](#5-información-adicional)
 
----
+<br>
+<br>
+<br>
+<br>
 
 ## Introducción
 
@@ -29,6 +36,11 @@ En este documento aprenderemos los conceptos fundamentales de criptografía y c�
 > - 🔴 Proteger la confidencialidad, integridad y autenticidad de la información
 > - 🟢 Reducir el tamaño de los archivos
 > - 🟡 Hacer que los datos sean más fáciles de compartir
+
+<br>
+<br>
+<br>
+<br>
 
 ## 1. Conceptos Fundamentales
 
@@ -83,6 +95,11 @@ console.log(`SHA-256: ${hashSha256}`);
 > - 🟢 Siempre produce una salida de longitud variable
 > - 🟡 Solo funciona con datos de texto plano
 
+<br>
+<br>
+<br>
+<br>
+
 ### 🔑 Criptografía Asimétrica vs Criptografía Simétrica
 
 #### **Criptografía Simétrica:**
@@ -130,6 +147,11 @@ En la práctica, se suele combinar ambos tipos:
 > - 🟢 La simétrica es más segura que la asimétrica
 > - 🟡 Ambas requieren compartir la clave de forma segura
 
+<br>
+<br>
+<br>
+<br>
+
 ### 🏛️ Certificado Digital
 
 Un certificado digital es un documento electrónico que asocia una clave pública con una identidad específica. La función clave es que una Autoridad de Certificación (CA) verifica tu identidad y garantiza que la clave pública pertenece realmente a la persona o entidad declarada. Lo emite una Autoridad de Certificación (CA) y contiene:
@@ -152,6 +174,11 @@ Un certificado digital es un documento electrónico que asocia una clave públic
 > - 🔴 Que la clave pública pertenece realmente a la identidad declarada
 > - 🟢 Que el certificado nunca expirará
 > - 🟡 Que el propietario puede usar cualquier clave privada
+
+<br>
+<br>
+<br>
+<br>
 
 ## 2. Aplicaciones Prácticas de estos Conceptos
 
@@ -183,6 +210,11 @@ Ver base de datos
 > - 🔴 Porque si alguien accede a la base de datos, puede ver todas las contraseñas
 > - 🟢 Porque las contraseñas se corrompen fácilmente
 > - 🟡 Porque es más lento procesar texto plano
+
+<br>
+<br>
+<br>
+<br>
 
 ### 🖥️ SSH (Secure Shell)
 
@@ -246,6 +278,11 @@ ls -l ~/.ssh/
 > - 🟢 Es más fácil de configurar
 > - 🟡 Permite acceder a más servidores simultáneamente
 
+<br>
+<br>
+<br>
+<br>
+
 ### 🔒 HTTPS (HTTP Secure)
 
 HTTPS utiliza certificados SSL/TLS para cifrar la comunicación entre cliente y servidor.
@@ -270,6 +307,11 @@ HTTPS utiliza certificados SSL/TLS para cifrar la comunicación entre cliente y 
 > - 🔴 Que la comunicación entre cliente y servidor está cifrada
 > - 🟢 Que el servidor nunca puede ser hackeado
 > - 🟡 Que el usuario es anónimo
+
+<br>
+<br>
+<br>
+<br>
 
 ### 🎫 Tokens JWT (JSON Web Tokens)
 
@@ -316,6 +358,10 @@ Clave: 123456789 (Descifrada con un programa en JS dentro del repo ;)
 > - 🟢 RS256 es más fácil de implementar
 > - 🟡 HS256 es más seguro para entornos distribuidos
 
+<br>
+<br>
+<br>
+<br>
 
 ## 4. Reto Práctico
 
@@ -441,11 +487,12 @@ gpg -d archivo_cifrado.gpg
 > - 🔴 Para que solo el destinatario correcto pueda descifrarlo
 > - 🟢 Para que el archivo sea más pequeño
 > - 🟡 Para que el archivo se pueda abrir en cualquier sistema
+<br>
+<br>
+<br>
+<br>
 
-
-
-
-## 6. Información Adicional
+## 5. Información Adicional
 
 ### 🔄 Diferencias entre GPG y OpenSSL
 
