@@ -452,8 +452,30 @@ wsSE5in5sm0sGb4kvnhOERKd7hl3ML9ckrx7JG/E4CE+vzurNL4c4S5mFCxukA6q
 Bp1P+hWb5xhVPMGIwYUGyr++oRS+Riu1OK/PPskzHYoOUNraPY5MsoJdhhe5rKCo
 spfB9EY5topMh3XJ8mDckQUcYooc59Kp/u5o/ZKFpIBMmUxyjHC+7E8zgrf9qY6z
 qkVXiSzpDc9bpdJsPwlVSmINt3HkLGKt9TjfyHdN6LAMIqEZV0nHd86DcSmSXHLn
-dw==
-=z+2+
+d7kCDQRojLKpARAAn8jD1HDhl86atA5+Knw1PPkr++LF0T038vfC8RcMfMfmEI7/
+jV4reL4drvyGKMbd0DPrmhlBt69EeC24WGgbRUddm3Nom9RQkdAst6jCT1dDeXsd
+rDLaL9V1spSqFzUWrqcaREYhAv19MZV25EAvCZ8eLayaXJyrjIlFIY4RDZbda1dR
+Z/p6tcP8AihF0NUq97TDJf58nthD+ATF1K7uXSolFM1sWX/LvzCKsJiUf+Zl1b77
+ssDbpGhKaXFF8M9xKhqCjVyGx9SzbSrqELDu9cBZqZCnrUGI0DWl6XaANRYzUstE
+cND5b74i/KgvM6M3eS7XN3vmLhzbFBGy9XwzlA/AwxFqtX8elBXQZvYUv/LbxEzb
+r0J+pYFQmk1EWqCldbJbYxDHqbcEtgK9XpzeHuh5JZtSM9giHrc7pVMWAWPL3LIQ
+vBGduG+AlLDcMUrWTrsWTXsKHZgV7BzR3wh+tWT0MLxuF6/dTNfc0V6LItAIfOgq
+UkUZZIPKzrcNpAPzWwrQohAIWiLT60uiTQB1z8cEO9NGpgsRSeRma31kzIAj8/OX
+UtbgthektMzC7ADwAXmzmtOzsn+xczTqKvoLwXFPa+593x5AuTsLOFYhyB0JsegP
+i2HYUrFNhGXFCuO3n9Isbb1YLI95s5QxToOVkan4pOpnJdXxJZW55jjGKPMAEQEA
+AYkCPAQYAQoAJhYhBGT6MtB6D5z80wGApYWITqCS+F5EBQJojLKpAhsMBQkABpeA
+AAoJEIWITqCS+F5E3QEP/j9I1MwIxLU5BwxabADjbfeGSu7fiT6Pme8f8tCIUltr
+tHfNuxeRNdD0NojHAs6wIR3SXqZEII6edqQEgfV4Lcg0PI4DIcT3XZwBwbWhLMIw
+JVUD4t38AKI2G9N0rFVMVhHA29tz0/v5Xqp7W3hsg5T8F2mvfJ2fxjGhGVBECvk+
+2x8IfRsjqTVlRO29anN4GExuz8XvalR4LBLOgcY6cKc0RaLvvkMiOodvqZNgy2+8
+QvE4IPkvuW7knzWwfZam1y1ayKV0Yl2HIykPpD8ZZ4z6PnSYqm/DDsUtNtmETBUi
+jIqaYslybaH1enMgFTtK5ql++5fsWNn1Xun+FA5j1FXEGHDyRnPzhFxcNJpJvHHS
+cMnTrVKQ2NziPb412nS+ef5hAgXw5o5A1+Mh5AEgjf529xeAAbG0dBFW4CBLd/FA
+2eZaZ8ZhI5/Svo1Hw6WSQLvk33uEoJtv6G0m57ROVwGyBQMpIm2AY5tJ7MdQRgc0
+IJqVPScd4HXBuk8V+BLGfu0nyi0MxRZz79R/ffWKSVtj3MIO9LD4aT/PtGlwBGGk
+BI3bs0iSmta6/1aC5nvRtF2i0eQtG5lLyFIkgnQ3V5Qe9ooxfCZ28aU+iBvy26zO
+1t2zVPGWnODDvMDtbsGaBf8QGsOMGA/cltuozabKQQfQzATdcBXqDz9himeJEtAe
+=hMXW
 -----END PGP PUBLIC KEY BLOCK-----
 EOF
 
@@ -470,16 +492,6 @@ echo "Lo que me llevo de esta sesión..." > reto-minombre.txt
 ```bash
 gpg --output reto-minombre.gpg --encrypt --recipient jorgebenitezlopez@gmail.com reto-minombre.txt
 ```
-
-**Paso 7: Enviar el archivo cifrado** a Jorge para que lo descifre 🔓
-
-### 🌐 Nota sobre la Clave Pública
-
-La clave pública de Jorge ya está incluida en los pasos anteriores. Puedes buscarla en:
-
-https://keyserver.ubuntu.com/pks/lookup?search=jorgebenitezlopez%40gmail.com&fingerprint=on&op=index
-
-https://keys.openpgp.org/search?q=jorgebenitezlopez%40gmail.com
 
 ### 🔧 Comandos Adicionales Útiles
 
