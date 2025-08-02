@@ -194,6 +194,9 @@ INSERT INTO users (username, password) VALUES ('usuario', 'miContraseña123');
 
 -- ✅ CORRECTO - Almacenar solo el hash
 INSERT INTO users (username, password_hash) VALUES ('usuario', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3');
+
+-- ✅✅ MEJOR TODAVÍA - Almacenar solo el hash
+hash('sha256', $salt1 . '123456'); // hash distinto
 ```
 
 Ver base de datos
@@ -203,6 +206,8 @@ Ver base de datos
 2. Sistema genera hash de la contraseña introducida
 3. Compara con el hash almacenado en la base de datos
 4. Si coinciden, autenticación exitosa
+
+Opción más segura y avanzada aplicar tambien un salt: un valor aleatorio añadido a la contraseña antes de hacer el hash, evita hashes iguales para contraseñas iguales, invalida rainbow tables (tablas de hashes precalculados) y aumenta el costo computacional para ataques por fuerza bruta.
 
 > [!TIP]
 > 💾 ¿Por qué es peligroso almacenar contraseñas en texto plano en una base de datos?
